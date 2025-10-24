@@ -146,7 +146,7 @@ void build(const int pos, ll prod) {
 ll cal(vector<pll> divisor) {
 	ll ans = 1; ll length = n;
 	for (auto [_, cnt]: divisor) {
-		if (cnt > length) return 0;
+		// if (cnt > length) return 0;
 		ans *= euler(length, cnt); ans %= MOD;
 		// length -= cnt;
 	}
@@ -154,19 +154,19 @@ ll cal(vector<pll> divisor) {
 }
 ll cal(pair<ll, vector<pll>> divisor) {
 	auto [num, factors] = divisor;
-	// cerr << num << '|'; for (auto [p, cnt]: factors) cerr << p << '^' << cnt << ' '; cerr << '\n';
 	if (num > a) return 0;
 	ll ans = cal(factors);
+	// cerr << num << '|'; for (auto [p, cnt]: factors) cerr << p << '^' << cnt << ' '; cerr << "||" << ans << '\n';
 	for (int i = 0; i < total.size(); i++)
 		factors[i].second = total[i].second - factors[i].second;
 	num = b / num;
-	// // // cerr << num << '|'; for (auto [p, cnt]: factors) cerr << p << '^' << cnt << ' '; cerr << '\n';
+	// cerr << num << '|'; for (auto [p, cnt]: factors) cerr << p << '^' << cnt << ' '; cerr << '\n';
 	ans = ans * cal(factors) % MOD;
 	// cerr << b / num << ' ' << n << '=' << ans << '\n';
 	return ans;
 }
 
-main()
+int main()
 {
 	ios_base::sync_with_stdio(0); cin.tie(0);
 	build(); sieve();
