@@ -1,3 +1,9 @@
+# remove binary
+*
+!*/
+!*.*
+
 .during_contest
 .vscode
 .ccls*
+*.txt
