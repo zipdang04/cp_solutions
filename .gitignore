@@ -7,3 +7,5 @@
 .vscode
 .ccls*
 *.txt
+
+.DS_Store
