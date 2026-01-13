@@ -83,20 +83,15 @@ struct Data {
 	ll start = 0, len = 0;
 	Data(): start(0), len(0) {};
 	Data(ll start, ll len): start(start), len(len) {
-		// cerr << start << '.' << len << ' ';
-		// ll tmp = start; FOR(ll, i, 1, len) {cerr << char(get(tmp)+'A'); tmp++;} cerr << '|';
 
 		char c = get(start);
 		while (start % K and len > 0)
 			cnt[c]++, len--, (c += 1) %= K, start++;
-		// if (len == 0) FOR(ll, i, 0, K-1) cerr << cnt[i] << " \n"[i == K-1];
 		if (len == 0) return;
 		ll pkg = len / K; c = get(start + pkg*K), len %= K;
-		// cerr << '(' << start << ' ' << char(c+'A') << ' ' << pkg << ')';
 		FOR(ll, i, 0, K-1) cnt[i] += pkg;
 		FOR(ll, i, 0, len-1) cnt[c]++, (c += 1) %= K;
 
-		// FOR(ll, i, 0, K-1) cerr << cnt[i] << " \n"[i == K-1];
 	}
 	inline static Data combine(const Data one, const Data two) {
 		Data ans;
@@ -117,7 +112,6 @@ class SegTree {
 private:
 	ll len;
 	void update(ll idx, ll lo, ll hi, ll posL, ll posR, ll st) {
-		// cerr << "update" << ' ' << lo << ' ' << hi << '|' << st << '\n';
 		if (posR < lo or hi < posL) return;
 		if (posL <= lo and hi <= posR) {
 			ll len = start[hi+1] - start[lo];
@@ -162,12 +156,10 @@ void clear();
 int main() {
 	ios_base::sync_with_stdio(false); cin.tie(nullptr);
 	input();
-	// FOR(ll, i, 1, cntStart) cerr << start[i] << " \n"[i == cntStart];
 
 	seg = SegTree(cntStart);
 	FOR(ll, i, 1, q) {
 		auto [type, pos, a, b] = queries[i];
-		// cerr << type << ' ' << pos << ' ' << a << ' ' << b << '\n';
 		if (type == '+')
 			seg.update(a, b, pos);
 		else {
