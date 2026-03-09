@@ -33,10 +33,15 @@ main() {
 	newA[1] = a[1];
 	FOR(ll, i, 2, n) newA[i] = newA[i-1] + abs(a[i] - a[i-1]);
 	FOR(int, i, 1, n) cerr << newA[i] << '\n';
-
+	
 	ll diff = newA[n] - newA[1];
-	ll minus = newA[1] / diff;
-	cout << newA[n] - minus * diff;
+	
+	ll d = 0;
+	FOR(int, i, 2, n) d = __gcd(d, abs(a[i] - a[i-1]));
+	cerr << (d*=2) << '\n';
+	ll ans = newA[1];
+	if (d) {ans %= d; if (ans == 0) ans = d;}
+	ans += diff; cout << ans << '\n';
 }
 void input() {} 
 void clear() {}
